@@ -25,6 +25,18 @@ variable "OUTPUTS_PUBLISHER_STR" {
 variable "OUTPUTS_PUBLISHER_SPECIAL_CHARS_STR" {
 }
 
+variable "OUTPUTS_PUBLISHER_NUMBER" {
+    type = number
+}
+
+variable "OUTPUTS_PUBLISHER_FRACTION" {
+    type = number
+}
+
+variable "OUTPUTS_PUBLISHER_BOOL" {
+    type = bool
+}
+
 variable "VIRTUAL_NETWORK_ID_NEW" {
 }
 
@@ -60,4 +72,3 @@ variable "OUTPUTS" {
 
 variable "ALL_IN_ONE" {
 }
-

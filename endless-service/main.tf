@@ -6,6 +6,6 @@ resource "null_resource" "test_me" {
 
  provisioner "local-exec" {
 
-    command = "echo 'hello'; sleep 4h; echo 'world'"
+    command = "echo 'hello'; sleep 30; echo 'world'"
   }
 }

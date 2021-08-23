@@ -16,7 +16,7 @@ resource "aws_security_group" "my_sg" {
   description = "SG created from tomer.v service"
 
   tags = {
-    Name = "test",
+    Name = "${var.SG_NAME}",
     "tomer test" = "good test"
   }
 }

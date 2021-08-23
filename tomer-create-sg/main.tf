@@ -7,6 +7,7 @@ provider "aws" {
 locals {
   common_tags = {
     environment  = "tintin"
+    name = "tomer"
   }
 }
 

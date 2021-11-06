@@ -55,12 +55,6 @@ variable "PUBLIC_ADDRESS_OLD" {
 variable "SANDBOX_ID_NEW" {
 }
 
-variable "SANDBOX_ID" {
-}
-
-variable "SANDBOX_ID_OLD" {
-}
-
 variable "LITERAL_PARAMETER" {
 }
 

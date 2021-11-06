@@ -13,6 +13,11 @@ variable "boolean" {
   default = true
 }
 
+variable "tf_string" {
+  type = string
+  default = "some-text"
+}
+
 variable "tf_tuple" {
   type = tuple([map(string),string,number])
   default = [{key1 = "out-val1", key2 = "out-val2"}, "out-string", 6.7]

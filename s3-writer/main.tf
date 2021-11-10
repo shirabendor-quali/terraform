@@ -32,3 +32,11 @@ OUTPUTS:${var.OUTPUTS}
 ALL_IN_ONE:${var.ALL_IN_ONE}
 EOF
 }
+
+data "external" "presign" {
+  program = ["bash", "presign.sh", var.BUCKET_NAME, var.SANDBOX_ID, var.AWS_ACCESS_KEY, var.AWS_SECRET_ACCESS]
+}
+
+output "s3_file_url" {
+  value = "${data.external.presign.result.url}"
+}

@@ -13,6 +13,10 @@ variable "SERVER_NAME" {
 variable "SERVER_VERSION" {
 }
 
+variable "OUTPUTS_PUBLISHER_NO_HCL" {
+    type = string
+}
+
 variable "OUTPUTS_PUBLISHER_NUMBER" {
     type = number
 }
@@ -23,6 +27,18 @@ variable "OUTPUTS_PUBLISHER_FRACTION" {
 
 variable "OUTPUTS_PUBLISHER_BOOL" {
     type = bool
+}
+
+variable "OUTPUTS_PUBLISHER_TUPLE" {
+    type = tuple([map(string),string,number])
+}
+
+variable "OUTPUTS_PUBLISHER_OBJECT" {
+    type = object({
+        symbol = string
+        price = number
+        levels = list(number)
+    })
 }
 
 variable "LITERAL_PARAMETER" {

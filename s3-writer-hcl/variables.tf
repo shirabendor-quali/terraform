@@ -47,6 +47,10 @@ variable "LITERAL_PARAMETER" {
 variable "AWS_SSM_PARAMETER" {
 }
 
+variable "PUBLIC_ADDRESS_NEW" {
+    type = string
+}
+
 variable TF_INPUT_STRING {
     type = string
 }

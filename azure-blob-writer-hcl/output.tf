@@ -1,5 +1,5 @@
 output "sandbox" {
-  value = "${var.SANDBOX_ID}"
+  value = "${var.SANDBOX_ID_NEW}"
 }
 
 output "blob_url" {

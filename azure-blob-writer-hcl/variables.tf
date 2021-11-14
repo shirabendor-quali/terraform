@@ -1,10 +1,13 @@
-variable "BUCKET_NAME" {
+variable "storage_account_resource_group" {
 }
 
-variable "AWS_ACCESS_KEY" {
+variable "storage_account_name" {
 }
 
-variable "AWS_SECRET_ACCESS" {
+variable "storage_container_name" {
+}
+
+variable "blob_name" {
 }
 
 variable "SERVER_NAME" {
@@ -41,19 +44,6 @@ variable "OUTPUTS_PUBLISHER_OBJECT" {
     })
 }
 
-variable "LITERAL_PARAMETER" {
-}
-
-variable "AWS_SSM_PARAMETER" {
-}
-
-variable "PUBLIC_ADDRESS_NEW" {
-    type = string
-}
-
-variable "SANDBOX_ID_NEW" {
-    type = string
-}
 
 variable TF_INPUT_STRING {
     type = string
@@ -81,4 +71,13 @@ variable "TF_INPUT_OBJECT" {
         price = number
         levels = list(number)
     })
+}
+
+variable "PUBLIC_ADDRESS_NEW" {
+}
+
+variable "SANDBOX_ID_NEW" {
+}
+
+variable "LITERAL_PARAMETER" {
 }

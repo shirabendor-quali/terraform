@@ -1,0 +1,2 @@
+variable "INPUT_1" {
+}

@@ -1,15 +1,15 @@
 variable "str" {
-  type = "string"
+  type = string
   default = "some text"
 }
 
 variable "list" {
-  type    = "list"
+  type    = list
   default = ["a", "b", "c"]
 }
 
 variable "map" {
-  type = "map"
+  type = map
   default = {
       "user-a" = "a-topic",
       "user-b" = "c-topic",
@@ -18,7 +18,7 @@ variable "map" {
 }
 
 variable "obj" {
-  type = "map"
+  type = map
   default = {
     "age" = 52,
     "name" = "John",

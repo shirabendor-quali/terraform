@@ -9,7 +9,7 @@ variable "list" {
 }
 
 variable "map" {
-  type = map(string)
+  type = map
   default = {
       "user-a" = "a-topic",
       "user-b" = "c-topic",
@@ -18,7 +18,7 @@ variable "map" {
 }
 
 variable "obj" {
-  type = object({age=number, name=string, user=list(map(string))})
+  type = map
   default = {
     "age" = 52,
     "name" = "John",

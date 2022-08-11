@@ -3,6 +3,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "this" {
-    bucket = "${var.bucket_name}" 
+    bucket = "${var.BUCKET_NAME}" 
     acl = "private"  
 }

@@ -6,3 +6,5 @@ resource "aws_s3_bucket" "this" {
     bucket = "${var.BUCKET_NAME}" 
     acl = "private"  
 }
+
+// comment

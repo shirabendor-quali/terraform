@@ -1,5 +1,5 @@
 provider "google" {
-  project     = "my-project-id"
+  project     = "alexs-project-239406"
   region      = "us-central1"
 }
 

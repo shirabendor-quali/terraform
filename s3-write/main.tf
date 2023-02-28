@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_s3_bucket_object" "object" {
   bucket  = "${var.BUCKET_NAME}"
-  key     = "${var.SANDBOX_ID}.json"
+  key     = "my-test-key"
   content = "{ \"Content\": \"${var.CONTENT}\"}"
   acl     = "bucket-owner-full-control"
 }

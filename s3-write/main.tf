@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_s3_bucket_object" "object" {
   bucket  = "${var.BUCKET_NAME}"
-  key     = "my-test-key"
+  key     = "my-test-key-1"
   content = "{ \"Content\": \"${var.CONTENT}\"}"
   acl     = "bucket-owner-full-control"
 }

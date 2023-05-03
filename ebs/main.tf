@@ -61,7 +61,19 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
-  instance_profile = "arn:aws:iam::046086677675:role/torque-dev"
+
+#   setting {
+#     namespace = "aws:ec2:vpc"
+#     name      = "VPCId"
+#     value     = "vpc-xxxxxxxx"
+#   }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "IamInstanceProfile"
+    value     = "arn:aws:iam::046086677675:role/torque-dev"
+  }
+ 
 }
 
 resource "null_resource" "create_app_version" {

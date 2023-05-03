@@ -31,4 +31,5 @@ variable "environment_name" {
 
 variable "solution_stack_name" {
   description = "The name of the solution stack to use for the environment."
+  default = "64bit Amazon Linux 2 v3.4.1 running Python 3.8"
 }

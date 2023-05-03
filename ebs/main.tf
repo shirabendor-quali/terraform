@@ -48,16 +48,16 @@ resource "aws_s3_object" "hello_world_code_file" {
   bucket = data.aws_s3_bucket.bucket.id
 
   key    = "hello-world.zip"
-  source = data.archive_file.hello_world_zip.output_path
+  source = data.archive_file.app_hello_world_zip.output_path
 
-  etag = filemd5(data.archive_file.hello_world_zip.output_path)
+  etag = filemd5(data.archive_file.app_hello_world_zip.output_path)
 }
 
 resource "aws_elastic_beanstalk_application" "application" {
   name = var.application_name
 }
 
-resource "aws_elasticb_eanstalk_environment" "environment" {
+resource "aws_elastic_beanstalk_environment" "environment" {
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name

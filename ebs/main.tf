@@ -89,11 +89,10 @@ resource "null_resource" "create_app_version" {
 
   provisioner "local-exec" {
     command = <<EOT
-      aws elasticbeanstalk create-application-version \
+      aws --region "eu-central-1" elasticbeanstalk create-application-version \
         --application-name ${var.application_name} \
         --version-label "v1" \
         --source-bundle S3Bucket=${var.bucket_name},S3Key="hello-world.zip"
-        --region "eu-central-1"
     EOT
   }
 }

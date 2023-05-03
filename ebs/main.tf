@@ -77,9 +77,8 @@ resource "aws_elastic_beanstalk_environment" "environment" {
 }
 
 resource "null_resource" "create_app_version" {
-  # Use a null_resource as a placeholder for the local-exec provisioner
-
-  # Trigger the local-exec provisioner when the "aws_iam_policy_document" resource is created
+  depends_on = [aws_elastic_beanstalk_application.application]
+  
   triggers = {
     app_name      = var.application_name
     version_label = "v1"

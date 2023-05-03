@@ -14,13 +14,6 @@ variable "bucket_name" {
   default = "torque-app-artifacts-demo"
 }
 
-variable "lambda_iam_role" {
-  description = "Name of IAM role to execute serverless function."
-
-  type    = string
-  default = "torque-dev"
-}
-
 variable "application_name" {
   description = "The name of the Elastic Beanstalk application."
 }

@@ -62,3 +62,24 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
 }
+
+resource "null_resource" "create_app_version" {
+  # Use a null_resource as a placeholder for the local-exec provisioner
+
+  # Trigger the local-exec provisioner when the "aws_iam_policy_document" resource is created
+  triggers = {
+    app_name      = var.application_name
+    version_label = "v1"
+    s3_bucket     = var.bucket_name
+    s3_key        = "hello-world.zip"
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      aws elasticbeanstalk create-application-version \
+        --application-name ${var.app_name} \
+        --version-label "v1" \
+        --source-bundle S3Bucket=${var.bucket_name},S3Key="hello-world.zip"
+    EOT
+  }
+}

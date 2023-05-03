@@ -16,10 +16,12 @@ variable "bucket_name" {
 
 variable "application_name" {
   description = "The name of the Elastic Beanstalk application."
+  default = "torque-demo-application-name"
 }
 
 variable "environment_name" {
   description = "The name of the Elastic Beanstalk environment."
+  default = "torque-demo-environment-name"
 }
 
 variable "solution_stack_name" {

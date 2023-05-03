@@ -11,7 +11,7 @@ variable "bucket_name" {
   description = "Existing AWS Bucket to store code artifacts."
 
   type    = string
-  default = "torque-app-artifacts"
+  default = "torque-app-artifacts-demo"
 }
 
 variable "lambda_iam_role" {

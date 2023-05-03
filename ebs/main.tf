@@ -61,6 +61,7 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
+  instance_profile = "arn:aws:iam::046086677675:role/torque-dev"
 }
 
 resource "null_resource" "create_app_version" {
@@ -80,6 +81,7 @@ resource "null_resource" "create_app_version" {
         --application-name ${var.application_name} \
         --version-label "v1" \
         --source-bundle S3Bucket=${var.bucket_name},S3Key="hello-world.zip"
+        --region "eu-central-1"
     EOT
   }
 }

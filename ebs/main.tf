@@ -62,11 +62,11 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
 
-#   setting {
-#     namespace = "aws:ec2:vpc"
-#     name      = "VPCId"
-#     value     = "vpc-xxxxxxxx"
-#   }
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "VPCId"
+    value     = "vpc-02f6250509ffd0dcf"
+  }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"

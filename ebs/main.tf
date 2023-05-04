@@ -71,7 +71,7 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
-    value     = "arn:aws:iam::046086677675:role/InstanceProfilePowerUser"
+    value     = "arn:aws:iam::046086677675:instance-profile/InstanceProfilePowerUser"
   }
  
 }

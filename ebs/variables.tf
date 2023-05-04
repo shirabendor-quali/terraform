@@ -28,3 +28,15 @@ variable "solution_stack_name" {
   description = "The name of the solution stack to use for the environment."
   default = "64bit Amazon Linux 2 v3.5.2 running Python 3.7"
 }
+
+variable "vpc_id" {
+  default = "vpc-02f6250509ffd0dcf"
+}
+
+variable "instance_profile" {
+   default = "arn:aws:iam::046086677675:instance-profile/InstanceProfilePowerUser"
+}
+
+variable "subnet" {
+   default = "subnet-08fbd2c14ebda7831"
+}

@@ -85,6 +85,30 @@ resource "aws_elastic_beanstalk_environment" "environment" {
     name      = "IamInstanceProfile"
     value     = var.instance_profile
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "ServiceRole"
+    value     = "arn:aws:iam::046086677675:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "DefaultProcess"
+    value     = "http"
+  }  
  
 }
 

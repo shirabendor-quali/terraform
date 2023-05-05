@@ -97,24 +97,6 @@ resource "aws_elastic_beanstalk_environment" "environment" {
     name      = "ServiceRole"
     value     = "arn:aws:iam::046086677675:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk"
   }
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "Protocol"
-    value     = "HTTP"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "DefaultProcess"
-    value     = "http"
-  }  
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "DefaultProcess"
-    value     = "http"
-  }
  
 }
 

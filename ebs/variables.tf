@@ -37,6 +37,10 @@ variable "instance_profile" {
    default = "arn:aws:iam::046086677675:instance-profile/InstanceProfilePowerUser"
 }
 
-variable "subnet" {
+variable "subnet1" {
+   default = "subnet-08fbd2c14ebda7831"
+}
+
+variable "subnet2" {
    default = "subnet-08fbd2c14ebda7831"
 }

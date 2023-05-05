@@ -71,13 +71,13 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = var.subnet
+    value     = "${var.subnet1},${var.subnet2}"
   }
 
   setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"
-    value     = var.subnet
+    value     = "${var.subnet1},${var.subnet2}"
   }
 
   setting {

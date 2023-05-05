@@ -109,6 +109,12 @@ resource "aws_elastic_beanstalk_environment" "environment" {
     name      = "DefaultProcess"
     value     = "http"
   }  
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "DefaultProcess"
+    value     = "http"
+  }
  
 }
 

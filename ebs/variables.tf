@@ -38,9 +38,9 @@ variable "instance_profile" {
 }
 
 variable "subnet1" {
-   default = "subnet-08fbd2c14ebda7831"
+   default = "subnet-070ed9f20e39b1fa7"
 }
 
 variable "subnet2" {
-   default = "subnet-08fbd2c14ebda7831"
+   default = "subnet-05858ec71af44f964"
 }

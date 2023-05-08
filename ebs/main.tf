@@ -61,7 +61,7 @@ resource "aws_elastic_beanstalk_application_version" "default" {
   name        = "tf-test-version-label"
   application = aws_elastic_beanstalk_application.application.name
   description = "application version created by terraform"
-  bucket      = data.bucket.id
+  bucket      = data.aws_s3_bucket.bucket.id
   key         = aws_s3_object.application_code_file.id
   depends_on  = [aws_elastic_beanstalk_application.application]
 }

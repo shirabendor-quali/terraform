@@ -125,6 +125,18 @@ resource "aws_elastic_beanstalk_environment" "environment" {
     name      = "ELBScheme"
     value     = "internet facing"
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "true"
+  }
  
 }
 

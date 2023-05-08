@@ -25,17 +25,17 @@ resource "random_pet" "bucket_name" {
 }
 
 # Zip source code into zip file
-data "archive_file" "app_hello_world_zip" {
+data "archive_file" "application_zip" {
   type = "zip"
 
-  source_dir  = "${path.module}/hello-world"
-  output_path = "${path.module}/hello-world.zip"
+  source_dir  = "${path.module}/application"
+  output_path = "${path.module}/application.zip"
 }
 
 ## Watch for changes in ZIP SHA - used as a watcher for updated in the app sources
 resource "null_resource" "sha_change_checker" {
   triggers = {
-    src_hash = "${data.archive_file.app_hello_world_zip.output_sha}"
+    src_hash = "${data.archive_file.application_zip.output_sha}"
   }
 
   provisioner "local-exec" {
@@ -44,17 +44,26 @@ resource "null_resource" "sha_change_checker" {
 }
 
 # Upload app code archive from runner to S3 
-resource "aws_s3_object" "hello_world_code_file" {
+resource "aws_s3_object" "application_code_file" {
   bucket = data.aws_s3_bucket.bucket.id
 
-  key    = "hello-world.zip"
-  source = data.archive_file.app_hello_world_zip.output_path
+  key    = "application.zip"
+  source = data.archive_file.application_zip.output_path
 
-  etag = filemd5(data.archive_file.app_hello_world_zip.output_path)
+  etag = filemd5(data.archive_file.application_zip.output_path)
 }
 
 resource "aws_elastic_beanstalk_application" "application" {
   name = var.application_name
+}
+
+resource "aws_elastic_beanstalk_application_version" "default" {
+  name        = "tf-test-version-label"
+  application = aws_elastic_beanstalk_application.application.name
+  description = "application version created by terraform"
+  bucket      = aws_s3_bucket.application_code_file.id
+  key         = aws_s3_object.application_code_file.id
+  depends_on  = [aws_elastic_beanstalk_application.application]
 }
 
 resource "aws_elastic_beanstalk_environment" "environment" {
@@ -118,19 +127,19 @@ resource "aws_elastic_beanstalk_environment" "environment" {
  
 }
 
-resource "null_resource" "create_app_version" {
-  depends_on = [aws_elastic_beanstalk_application.application]
+# resource "null_resource" "create_app_version" {
+#   depends_on = [aws_elastic_beanstalk_application.application]
   
-  triggers = {
-    app_name      = var.application_name
-    version_label = "v1"
-    s3_bucket     = var.bucket_name
-    s3_key        = "hello-world.zip"
-  }
+#   triggers = {
+#     app_name      = var.application_name
+#     version_label = "v1"
+#     s3_bucket     = var.bucket_name
+#     s3_key        = "application.zip"
+#   }
 
-  provisioner "local-exec" {
-    command = <<EOT
-      aws --region "eu-central-1" elasticbeanstalk create-application-version --application-name ${var.application_name} --version-label "v1" --source-bundle S3Bucket=${var.bucket_name},S3Key="hello-world.zip"
-    EOT
-  }
-}
+#   provisioner "local-exec" {
+#     command = <<EOT
+#       aws --region ${var.aws_region} elasticbeanstalk create-application-version --application-name ${var.application_name} --version-label "v1" --source-bundle S3Bucket=${var.bucket_name},S3Key="application.zip"
+#     EOT
+#   }
+# }

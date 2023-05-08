@@ -97,6 +97,24 @@ resource "aws_elastic_beanstalk_environment" "environment" {
     name      = "ServiceRole"
     value     = "arn:aws:iam::046086677675:role/aws-service-role/elasticbeanstalk.amazonaws.com/AWSServiceRoleForElasticBeanstalk"
   }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "AssociatePublicIpAddress"
+    value     =  "True"
+  }
+
+   setting {
+    namespace = "aws:elasticbeanstalk:environment:process:default"
+    name      = "MatcherHTTPCode"
+    value     = "200"
+  }
+
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBScheme"
+    value     = "internet facing"
+  }
  
 }
 

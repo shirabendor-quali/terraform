@@ -58,7 +58,7 @@ resource "aws_elastic_beanstalk_application" "application" {
 }
 
 resource "aws_elastic_beanstalk_application_version" "default" {  
-  name        = data.archive_file.application_zip.output_sha
+  name        = substr(data.archive_file.application_zip.output_sha, length(data.archive_file.application_zip.output_sha) - 7, 8)
   application = aws_elastic_beanstalk_application.application.name
   description = "application version created by terraform"
   bucket      = data.aws_s3_bucket.bucket.id

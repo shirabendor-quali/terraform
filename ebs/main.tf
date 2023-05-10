@@ -11,6 +11,10 @@ provider "aws" {
   region = var.aws_region
 }
 
+locals {
+  environment_suffix = count.index + 1
+}
+
 # allows using data attributes of current AWS account
 data "aws_caller_identity" "current" {}
 
@@ -57,8 +61,8 @@ resource "aws_elastic_beanstalk_application" "application" {
   name = var.application_name
 }
 
-resource "aws_elastic_beanstalk_application_version" "default" {
-  name        = "${var.environment_name}-v${count.index}"
+resource "aws_elastic_beanstalk_application_version" "default" {  
+  name        = "${var.environment_name}-v${local.environment_suffix}"
   application = aws_elastic_beanstalk_application.application.name
   description = "application version created by terraform"
   bucket      = data.aws_s3_bucket.bucket.id
@@ -67,7 +71,8 @@ resource "aws_elastic_beanstalk_application_version" "default" {
 }
 
 resource "aws_elastic_beanstalk_environment" "environment" {
-  name                = var.environment_name
+  count               = 1
+  name                = "${var.environment_name}-${count.index}"
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
   version_label = aws_elastic_beanstalk_application_version.default[count.index].name
@@ -140,20 +145,3 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   }
  
 }
-
-# resource "null_resource" "create_app_version" {
-#   depends_on = [aws_elastic_beanstalk_application.application]
-  
-#   triggers = {
-#     app_name      = var.application_name
-#     version_label = "v1"
-#     s3_bucket     = var.bucket_name
-#     s3_key        = "application.zip"
-#   }
-
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       aws --region ${var.aws_region} elasticbeanstalk create-application-version --application-name ${var.application_name} --version-label "v1" --source-bundle S3Bucket=${var.bucket_name},S3Key="application.zip"
-#     EOT
-#   }
-# }

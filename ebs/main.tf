@@ -58,7 +58,8 @@ resource "aws_elastic_beanstalk_application" "application" {
 }
 
 resource "aws_elastic_beanstalk_application_version" "default" {
-  name        = "${var.environment_name}-${count.index}"
+  count       = 1  
+  name        = "${var.environment_name}-v${count.index}"
   application = aws_elastic_beanstalk_application.application.name
   description = "application version created by terraform"
   bucket      = data.aws_s3_bucket.bucket.id

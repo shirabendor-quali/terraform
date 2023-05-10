@@ -3,7 +3,7 @@ output "environment_url" {
 }
 
 output "application_version" {
-  value = aws_elastic_beanstalk_application_version.default.name
+  value = aws_elastic_beanstalk_application_version.default[count.index].name
 }
 
 

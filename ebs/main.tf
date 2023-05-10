@@ -67,7 +67,6 @@ resource "aws_elastic_beanstalk_application_version" "default" {
 }
 
 resource "aws_elastic_beanstalk_environment" "environment" {
-  count               = 1
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name

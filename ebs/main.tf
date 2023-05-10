@@ -11,10 +11,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-locals {
-  environment_suffix = count.index + 1
-}
-
 # allows using data attributes of current AWS account
 data "aws_caller_identity" "current" {}
 
@@ -62,7 +58,7 @@ resource "aws_elastic_beanstalk_application" "application" {
 }
 
 resource "aws_elastic_beanstalk_application_version" "default" {  
-  name        = "${var.environment_name}-v${local.environment_suffix}"
+  name        = "v1"
   application = aws_elastic_beanstalk_application.application.name
   description = "application version created by terraform"
   bucket      = data.aws_s3_bucket.bucket.id
@@ -72,10 +68,10 @@ resource "aws_elastic_beanstalk_application_version" "default" {
 
 resource "aws_elastic_beanstalk_environment" "environment" {
   count               = 1
-  name                = "${var.environment_name}-${count.index}"
+  name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
-  version_label = aws_elastic_beanstalk_application_version.default[count.index].name
+  version_label = aws_elastic_beanstalk_application_version.default.name
     
 
   setting {

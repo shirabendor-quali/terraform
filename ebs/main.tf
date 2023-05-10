@@ -71,7 +71,8 @@ resource "aws_elastic_beanstalk_environment" "environment" {
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.application.name
   solution_stack_name = var.solution_stack_name
-  version_label = aws_elastic_beanstalk_application_version.default.name
+  version_label = aws_elastic_beanstalk_application_version.default[count.index]
+    
 
   setting {
     namespace = "aws:ec2:vpc"

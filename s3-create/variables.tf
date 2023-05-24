@@ -13,3 +13,8 @@ variable "encryption_key_arn" {
     default = ""
     type = string
 }
+
+variable "vido" {
+    default = null
+    type = string
+}

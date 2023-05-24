@@ -3,7 +3,7 @@ output "s3_bucket_id" {
 }
 
 output "region2" {
-  value = region2
+  value = var.region2
 }
 
 

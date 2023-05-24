@@ -8,3 +8,8 @@ variable "name" {
     description = "Region where to create resources" 
     type = string
 }
+
+variable "encryption_key_arn" {
+    default = ""
+    type = string
+}

@@ -5,6 +5,7 @@ variable "region" {
 }
 
 variable "name" {
+    default = null
     description = "Region where to create resources" 
     type = string
 }
@@ -15,6 +16,6 @@ variable "encryption_key_arn" {
 }
 
 variable "vido" {
-    default = null
+    description = "Vidooooooooooooooooooooooo"
     type = string
 }

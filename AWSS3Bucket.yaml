@@ -7,10 +7,6 @@ Parameters:
     Type: String
     Default: my-bucket
     Description: Logical Bucket Name
-  tags:
-    - my-test-tag
-      key: test-tag
-      value: test-tag-value
 Outputs:
   Arn:
     Description: The Bucket Arn

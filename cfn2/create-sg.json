@@ -19,18 +19,5 @@
           ]
       }
     },
-    "mySg2": {
-      "Type": "AWS::EC2::SecurityGroup",
-      "Properties": {
-          "GroupDescription": "test",
-          "Tags": [
-              {
-                "Key": "Name",
-                "Value":  "sgName2"
-              }
-          ]
-      }
-    }
-
   }
 }

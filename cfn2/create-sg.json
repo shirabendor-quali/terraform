@@ -1,0 +1,23 @@
+{
+  "Parameters": {
+    "sgName": {
+      "Type": "String",
+      "Description": "Name of the security group"
+    }
+  },
+  "Description": "Creates a security group 1",
+  "Resources": {
+    "mySg": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+          "GroupDescription": "test",
+          "Tags": [
+              {
+                "Key": "Name",
+                "Value":  { "Ref" : "sgName" }
+              }
+          ]
+      }
+    }
+  }
+}

@@ -15,7 +15,3 @@ variable "encryption_key_arn" {
     type = string
 }
 
-variable "vido" {
-    description = "Vidooooooooooooooooooooooo"
-    type = string
-}

@@ -15,5 +15,4 @@ resource "aws_s3_bucket" "bucket" {
   bucket = var.name
 }
 
-# this is an update
-# one more
+

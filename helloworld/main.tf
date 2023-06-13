@@ -1,7 +1,7 @@
 variable "input_value" {
-  type        = number
+  type        = string
   description = "Input value for the Terraform configuration"
-  default     = 1
+  default     = "default"
 }
 
 resource "null_resource" "example" {
@@ -11,8 +11,8 @@ resource "null_resource" "example" {
 
   provisioner "local-exec" {
     command = <<EOT
-if [[ ${var.input_value} -eq 2 ]]; then
-  echo "Error: Input value is 2. Failing apply phase."
+if [[ "${var.input_value}" == "shira" ]]; then
+  echo "Error: Input value is 'shira'. Failing apply phase."
   exit 1
 fi
 EOT

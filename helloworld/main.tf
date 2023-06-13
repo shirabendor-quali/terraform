@@ -1,14 +1,20 @@
-terraform {
-  # This module is now only being tested with Terraform 0.13.x. However, to make upgrading easier, we are setting
-  # 0.12.26 as the minimum version, as that version added support for required_providers with source URLs, making it
-  # forwards compatible with 0.13.x code.
-  required_version = ">= 0.12.26"
+variable "input_value" {
+  type        = number
+  description = "Input value for the Terraform configuration"
+  default     = 1
 }
 
-# resource "time_sleep" "wait_30_seconds" {
-#   create_duration = "120s"
-# }
+resource "null_resource" "example" {
+  triggers = {
+    input_value = var.input_value
+  }
 
-# website::tag::1:: The simplest possible Terraform module: it just outputs "Hello, World!"
-output "hello_world" {
-  value = "Hello, World!"
+  provisioner "local-exec" {
+    command = <<EOT
+if [[ ${var.input_value} -eq 2 ]]; then
+  echo "Error: Input value is 2. Failing apply phase."
+  exit 1
+fi
+EOT
+  }
+}

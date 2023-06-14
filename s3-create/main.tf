@@ -15,4 +15,4 @@ resource "aws_s3_bucket" "bucket" {
   bucket = var.name
 }
 
-# Hi Everyone! <3
+# new update

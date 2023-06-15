@@ -1,7 +1,20 @@
-package torque.environment
+variable "input_value" {
+  type        = string
+  description = "Input value for the Terraform configuration"
+  default     = "default"
+}
 
-import future.keywords.if
+resource "null_resource" "example" {
+  triggers = {
+    input_value = var.input_value
+  }
 
-result := { "decision": "Manual" } if {
-  input.action_identifier.action_type != "Extend"  
+  provisioner "local-exec" {
+    command = <<EOT
+if [ "${var.input_value}" == "shira" ]; then
+  echo "Error: Input value is 'shira'. Failing apply phase."
+  exit 1
+fi
+EOT
+  }
 }

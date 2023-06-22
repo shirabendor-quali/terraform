@@ -10,3 +10,5 @@ resource "aws_s3_bucket_object" "object" {
   content = "{ \"Content\": \"${var.CONTENT}\"}"
   acl     = "bucket-owner-full-control"
 }
+
+# this is an update

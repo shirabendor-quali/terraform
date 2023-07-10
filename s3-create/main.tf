@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+# update dbs
 provider "aws" {
   region = var.region
 }

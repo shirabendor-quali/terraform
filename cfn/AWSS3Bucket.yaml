@@ -8,7 +8,7 @@ Parameters:
     Default: my-bucket
     Description: Logical Bucket Name
   TestNumber:
-    Type: String
+    Type: Number
 Outputs:
   Arn:
     Description: The Bucket Arn

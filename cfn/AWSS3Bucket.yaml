@@ -8,7 +8,7 @@ Parameters:
     Default: my-bucket
     Description: Logical Bucket Name
   TestNumber:
-    Type: Number
+    Type: AWS::EC2::AvailabilityZone::Name
 Outputs:
   Arn:
     Description: The Bucket Arn

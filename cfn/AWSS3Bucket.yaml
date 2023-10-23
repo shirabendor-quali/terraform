@@ -33,7 +33,11 @@ Resources:
       OwnershipControls:
         Rules:
           - ObjectOwnership: ObjectWriter
-      BucketName: !Ref BucketName
+      BucketName: 
+        Fn::Sub: 
+          - "${BucketName}-${TestNumber}"
+          - BucketName: !Ref BucketName
+            TestNumber: !Ref TestNumber
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html

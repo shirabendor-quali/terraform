@@ -37,7 +37,7 @@ Resources:
         Fn::Sub: 
           - "${BucketName}-${TestNumber}"
           - BucketName: !Ref BucketName
-            TestNumber: !Ref TestNumber
+            TestNumber: !Select [0, !Ref TestNumber] # Select the first element from the list
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html

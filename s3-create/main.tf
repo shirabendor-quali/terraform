@@ -7,13 +7,14 @@ terraform {
   }
 }
 
-# update dbs
 provider "aws" {
   region = var.region
 }
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.name
+  tags = {
+    Environment = "Dev"
+  }
 }
 
-# new update 12345

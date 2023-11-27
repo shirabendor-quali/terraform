@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
+Description: Internal Template - Generate link based on EC2 outputs
 
 Parameters:
   QualixIP:
@@ -14,51 +15,25 @@ Parameters:
   TargetIPAddress:
     Type: String
 
-  TargetUsername:
+  TargetUsernameSSMParameter:
     Type: String
 
-  TargetPassword:
+  TargetPasswordSSMParameter:
     Type: String
 
 Resources:
-  ResourceUUID:
-    Type: "AWS::CloudFormation::Random"
-
-  CurrentTimeStatic:
-    Type: "AWS::CloudFormation::WaitConditionHandle"
-
-  HttpLink:
-    Type: "AWS::CloudFormation::Output"
+  TargetUsername:
+    Type: 'AWS::SSM::Parameter::Value<String>'
     Properties:
-      Value:
-        Fn::Sub: "https://${QualixIP}/remote/#/client/c/${Protocol}${ResourceUUID}?qtoken=${Token}&hostname=${TargetIPAddress}&protocol=${Protocol}&port=${ConnectionPort}&username=${TargetUsername}&password=${Password}${ExtraAttributes}"
+      Name: !Ref TargetUsernameSSMParameter
 
-Conditions:
-  IsRDP:
-    Fn::Equals: [!Ref Protocol, "rdp"]
-
-Mappings:
-  ExtraAttributes:
-    rdp: "&security=any&ignore-cert=true"
-    ssh: ""
+  TargetPassword:
+    Type: 'AWS::SSM::Parameter::Value<String>'
+    Properties:
+      Name: !Ref TargetPasswordSSMParameter
 
 Outputs:
-  Token:
+  HttpLink:
     Value:
-      Fn::Base64:
-        Fn::Join:
-          - ""
-          - - !Ref ResourceUUID
-            - ","
-            - !Sub "${CurrentTime}0000000"
+      Fn::Sub: "https://${QualixIP}/remote/#/client/c/${Protocol}${ResourceUUID}?qtoken=${Token}&hostname=${TargetIPAddress}&protocol=${Protocol}&port=${ConnectionPort}&username=${TargetUsername}&password=${TargetPassword}${ExtraAttributes}"
 
-  Password:
-    Value:
-      Fn::Base64: !Ref TargetPassword
-
-  ExtraAttributes:
-    Value:
-      Fn::FindInMap:
-        - ExtraAttributes
-        - !Ref Protocol
-        - " "

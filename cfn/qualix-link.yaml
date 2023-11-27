@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  QualixIP:
+    Type: String
+
+  Protocol:
+    Type: String
+    AllowedValues: ["rdp", "ssh"]
+
+  ConnectionPort:
+    Type: Number
+
+  TargetIPAddress:
+    Type: String
+
+  TargetUsername:
+    Type: String
+
+  TargetPassword:
+    Type: String
+
+Resources:
+  ResourceUUID:
+    Type: "AWS::CloudFormation::Random"
+
+  CurrentTimeStatic:
+    Type: "AWS::CloudFormation::WaitConditionHandle"
+
+  HttpLink:
+    Type: "AWS::CloudFormation::Output"
+    Properties:
+      Value:
+        Fn::Sub: "https://${QualixIP}/remote/#/client/c/${Protocol}${ResourceUUID}?qtoken=${Token}&hostname=${TargetIPAddress}&protocol=${Protocol}&port=${ConnectionPort}&username=${TargetUsername}&password=${Password}${ExtraAttributes}"
+
+Conditions:
+  IsRDP:
+    Fn::Equals: [!Ref Protocol, "rdp"]
+
+Mappings:
+  ExtraAttributes:
+    rdp: "&security=any&ignore-cert=true"
+    ssh: ""
+
+Outputs:
+  Token:
+    Value:
+      Fn::Base64:
+        Fn::Join:
+          - ""
+          - - !Ref ResourceUUID
+            - ","
+            - !Sub "${CurrentTime}0000000"
+
+  Password:
+    Value:
+      Fn::Base64: !Ref TargetPassword
+
+  ExtraAttributes:
+    Value:
+      Fn::FindInMap:
+        - ExtraAttributes
+        - !Ref Protocol
+        - " "

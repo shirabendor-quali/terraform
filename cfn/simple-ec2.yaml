@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create an EC2 instance
+Description: External Template - Create Ubuntu EC2 instance and invoke internal template
 
 Parameters:
   LatestAmiId:
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
-    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+    Default: '/aws/service/ami-ubuntu-latest/ubuntu-ami-hvm-x86_64-gp2'
 
 Resources:
   MyEC2Instance:
@@ -12,6 +12,25 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: !Ref LatestAmiId
-      # Tags:
-      #   - Key: Name
-      #     Value: MyEC2Instance
+      KeyName: <YourKeyPairName>
+      UserData: !Base64
+        Fn::Sub: |
+          #!/bin/bash
+          echo "ubuntu:P@$$w0rd1234!" | chpasswd
+
+  InternalTemplate:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: <URL to the internal template>
+      TimeoutInMinutes: 5
+      Parameters:
+        QualixIP: <Your QualixIP value>
+        Protocol: <Your Protocol value>
+        ConnectionPort: <Your ConnectionPort value>
+        TargetIPAddress: !GetAtt MyEC2Instance.PublicIp
+        TargetUsernameSSMParameter: !Sub "/ec2/${MyEC2Instance}/username"
+        TargetPasswordSSMParameter: !Sub "/ec2/${MyEC2Instance}/password"
+
+Outputs:
+  MyEC2InstancePublicIP:
+    Value: !GetAtt MyEC2Instance.PublicIp

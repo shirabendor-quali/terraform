@@ -1,32 +1,9 @@
-# AWSTemplateFormatVersion: '2010-09-09'
-# Description: External Template - Create Ubuntu EC2 instance and invoke internal template
-
-# Parameters:
-#   LatestAmiId:
-#     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
-#     Default: '/aws/service/ami-ubuntu-latest/ubuntu-ami-hvm-x86_64-gp2'
-
-# Resources:
-#   MyEC2Instance:
-#     Type: AWS::EC2::Instance
-#     Properties:
-#       InstanceType: t2.micro
-#       ImageId: !Ref LatestAmiId
-#       UserData: !Base64
-#         Fn::Sub: |
-#           #!/bin/bash
-#           useradd -m -s /bin/bash ubuntu
-#           echo "ubuntu:P@$$w0rd1234!" | chpasswd
-#           sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-#           service sshd restart
-
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create an EC2 instance
-
+Description: Create Ubuntu EC2 instance 
 Parameters:
   LatestAmiId:
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
-    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+    Default: '/aws/service/ami-ubuntu-latest/ubuntu-ami-hvm-x86_64-gp2'
 
 Resources:
   MyEC2Instance:
@@ -34,7 +11,29 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: !Ref LatestAmiId
+      UserData: !Base64
+        Fn::Sub: |
+          #!/bin/bash
+          useradd -m -s /bin/bash ubuntu
+          echo "ubuntu:P@$$w0rd1234!" | chpasswd
+          sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+          service sshd restart
 
-Outputs:
-  MyEC2InstancePublicIP:
-    Value: !GetAtt MyEC2Instance.PublicIp
+# AWSTemplateFormatVersion: '2010-09-09'
+# Description: Create an EC2 instance
+
+# Parameters:
+#   LatestAmiId:
+#     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+#     Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+
+# Resources:
+#   MyEC2Instance:
+#     Type: AWS::EC2::Instance
+#     Properties:
+#       InstanceType: t2.micro
+#       ImageId: !Ref LatestAmiId
+
+# Outputs:
+#   MyEC2InstancePublicIP:
+#     Value: !GetAtt MyEC2Instance.PublicIp

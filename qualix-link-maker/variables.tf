@@ -13,3 +13,9 @@ variable "target_password" {
   default = "P@$$w0rd1234!"
 }
 
+variable "protocol" {
+  type = string
+  default = "SSH"
+}
+
+

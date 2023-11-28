@@ -12,7 +12,6 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: !Ref LatestAmiId
-      KeyName: <YourKeyPairName>
       UserData: !Base64
         Fn::Sub: |
           #!/bin/bash

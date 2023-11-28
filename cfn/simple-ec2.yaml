@@ -18,19 +18,6 @@ Resources:
           #!/bin/bash
           echo "ubuntu:P@$$w0rd1234!" | chpasswd
 
-  InternalTemplate:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: <URL to the internal template>
-      TimeoutInMinutes: 5
-      Parameters:
-        QualixIP: <Your QualixIP value>
-        Protocol: <Your Protocol value>
-        ConnectionPort: <Your ConnectionPort value>
-        TargetIPAddress: !GetAtt MyEC2Instance.PublicIp
-        TargetUsernameSSMParameter: !Sub "/ec2/${MyEC2Instance}/username"
-        TargetPasswordSSMParameter: !Sub "/ec2/${MyEC2Instance}/password"
-
 Outputs:
   MyEC2InstancePublicIP:
     Value: !GetAtt MyEC2Instance.PublicIp

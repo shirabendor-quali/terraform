@@ -18,4 +18,8 @@ variable "protocol" {
   default = "SSH"
 }
 
+variable "connection_port" {
+  type = number
+  default = 3389
+}
 

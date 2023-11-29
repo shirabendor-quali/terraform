@@ -15,7 +15,7 @@ variable "target_password" {
 
 variable "protocol" {
   type = string
-  default = "SSH"
+  default = "ssh"
 }
 
 variable "connection_port" {

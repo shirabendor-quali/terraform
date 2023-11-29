@@ -19,6 +19,10 @@ Resources:
           sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
           service sshd restart
 
+Outputs:
+  MyEC2InstancePublicIP:
+    Value: !GetAtt MyEC2Instance.PublicIp         
+
 # AWSTemplateFormatVersion: '2010-09-09'
 # Description: Create an EC2 instance
 

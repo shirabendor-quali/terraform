@@ -13,6 +13,7 @@ Resources:
       ImageId: !Ref LatestAmiId
       SecurityGroupIds:
         - sg-0d89d6d91b4e2bfb0
+      SubnetId: subnet-024852156a24074fa
       UserData: !Base64
       UserData: !Base64
         Fn::Sub: |

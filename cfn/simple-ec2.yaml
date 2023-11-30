@@ -21,7 +21,7 @@ Resources:
       UserData: !Base64
         Fn::Sub: |
           #!/bin/bash
-          sudo echo "ubuntu:1234" | chpasswd
+          sudo echo "ec2-user:1234" | chpasswd
           sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
           sudo service sshd restart
 

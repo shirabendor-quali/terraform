@@ -20,6 +20,6 @@ variable "protocol" {
 
 variable "connection_port" {
   type = number
-  default = 3389
+  default = 22
 }
 

@@ -5,7 +5,7 @@ variable "qualix_ip" {
 
 variable "target_username" {
   type = string
-  default = "ubuntu"
+  default = "ec2-user"
 }
 
 variable "target_password" {

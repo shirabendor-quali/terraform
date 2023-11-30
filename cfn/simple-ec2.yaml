@@ -6,7 +6,7 @@ Parameters:
     Default: '/aws/service/ami-ubuntu-latest/ubuntu-ami-hvm-x86_64-gp2'
   KeyName:
     Type: 'AWS::EC2::KeyPair::KeyName'
-    Description: test-for-demo
+    Default: test-for-demo
 
 Resources:
   MyEC2Instance:

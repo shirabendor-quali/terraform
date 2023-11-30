@@ -14,9 +14,9 @@ Resources:
       UserData: !Base64
         Fn::Sub: |
           #!/bin/bash
-          echo "ubuntu:P@$$w0rd1234!" | chpasswd
-          sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-          service sshd restart
+          sudo echo "ubuntu:1234" | chpasswd
+          sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+          sudo service sshd restart
 
 Outputs:
   MyEC2InstancePublicIP:

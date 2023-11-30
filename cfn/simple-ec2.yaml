@@ -4,6 +4,9 @@ Parameters:
   LatestAmiId:
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
     Default: '/aws/service/ami-ubuntu-latest/ubuntu-ami-hvm-x86_64-gp2'
+  KeyName:
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    Description: test-for-demo
 
 Resources:
   MyEC2Instance:
@@ -13,6 +16,7 @@ Resources:
       ImageId: !Ref LatestAmiId
       SecurityGroupIds:
         - sg-0d89d6d91b4e2bfb0
+      KeyName: !Ref KeyName  
       SubnetId: subnet-024852156a24074fa
       UserData: !Base64
         Fn::Sub: |

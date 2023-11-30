@@ -10,7 +10,7 @@ variable "target_username" {
 
 variable "target_password" {
   type = string
-  default = "P@$$w0rd1234!"
+  default = "1234"
 }
 
 variable "protocol" {

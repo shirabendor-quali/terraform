@@ -4,4 +4,4 @@
 federated_token=$(cat $AZURE_FEDERATED_TOKEN_FILE)
 # Use the federated token to authenticate your API call
 #curl -X POST -H "Authorization: Bearer $ACCESS_TOKEN" -H "Content-Type: application/json" --header "Content-Length: 0" https://management.azure.com/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$1/providers/Microsoft.Compute/virtualMachines/$2/start?api-version=2023-09-01 
-curl -X POST -H "Authorization: Bearer $federated_token" -H "Content-Type: application/json" https://management.azure.com/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$1/providers/Microsoft.Compute/virtualMachines/$2/start?api-version=2023-09-01
+curl -X POST -H "Authorization: Bearer $federated_token" -H "Content-Type: application/json" --header "Content-Length: 0" https://management.azure.com/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$1/providers/Microsoft.Compute/virtualMachines/$2/start?api-version=2023-09-01

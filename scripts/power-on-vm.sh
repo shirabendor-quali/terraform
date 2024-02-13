@@ -13,9 +13,13 @@ output=$(curl -s  --location --request GET "https://login.microsoftonline.com/$A
 
 export token=$(echo $output | jq -r '.access_token' )
 
+echo " resource group :" $ResourceGroup
+echo " VmName :" $VmName
+echo " arm subscription id :" $ARM_SUBSCRIPTION_ID
+echo curl -X POST -H "Authorization: Bearer $token" -H "Content-Type: application/json" --header "Content-Length: 0" https://management.azure.com/subscriptions/24aae708-4612-497c-a91e-7ec5c657f9db/resourceGroups/$ResourceGroup/providers/Microsoft.Compute/virtualMachines/$VmName/start?api-version=2023-09-01 
 curl -X POST -H "Authorization: Bearer $token" -H "Content-Type: application/json" --header "Content-Length: 0" https://management.azure.com/subscriptions/24aae708-4612-497c-a91e-7ec5c657f9db/resourceGroups/$ResourceGroup/providers/Microsoft.Compute/virtualMachines/$VmName/start?api-version=2023-09-01
 
-echo "new!" 
+echo "new3!" 
 # get access token
 #token_response=$(curl -s 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F&client_id='$ARM_CLIENT_ID -H Metadata:true)
 #echo 

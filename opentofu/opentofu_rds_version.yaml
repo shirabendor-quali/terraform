@@ -1,0 +1,49 @@
+spec_version: 2-preview
+description: Creates AWS RDS database
+
+inputs:
+  compute-service:
+    type: agent  
+  db_engine:
+    type: string
+    default: "mysql"  
+  res_identifier:
+    type: string
+    default: "tf-rds-123"
+  instance_class:
+    type: string
+    default: "res_group1"
+  admin_username:
+    type: string
+  admin_password:
+    type: string
+  region:
+    type: string
+    default: eu-west-1
+
+outputs:
+  host: 
+    value: '{{ .grains.tf-aws-rds.outputs.rds_hostname }}'
+  post: 
+    value: '{{ .grains.tf-aws-rds.outputs.rds_port }}'
+
+grains:
+  tf-aws-rds:
+    kind: opentofu
+    spec:
+      source:        
+        path: terraform/aws_mysql_rds
+        store: private-blueprints
+      agent:
+        name: '{{ .inputs.compute-service }}'
+      version: 1.6.0
+      inputs:
+        - db_engine: '{{ .inputs.db_engine }}'
+        - res_identifier: '{{ .inputs.res_identifier }}'
+        - instance_class: '{{ .inputs.instance_class }}'
+        - admin_username: '{{ .inputs.admin_username }}'
+        - admin_password: '{{ .inputs.admin_password }}'
+        - region: '{{ .inputs.region }}'
+      outputs:
+        - rds_hostname
+        - rds_port

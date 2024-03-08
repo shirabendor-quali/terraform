@@ -1,2 +1,3 @@
+echo 123
 echo $TORQUE_TF_PLAN_PATH
 cat $TORQUE_TF_PLAN_PATH

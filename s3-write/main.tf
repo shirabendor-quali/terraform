@@ -1,6 +1,6 @@
-provider "aws" {
-  region = "eu-west-1"
-}
+#provider "aws" {
+#  region = "eu-west-1"
+#}
 
 # comment 12345
 
